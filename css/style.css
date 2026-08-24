@@ -121,6 +121,97 @@ footer{margin-top:5rem;border-top:1px solid var(--line);background:#03070d;paddi
   z-index: 9999;
 }
 
+
+/* PADRÃO DOS 3 BOTÕES */
+
+.botoes-flutuantes .btn-flutuante {
+  position: static;
+  margin: 0;
+
+  width: 135px;
+  min-width: 135px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0.8rem 1rem;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    110deg,
+    #19E37A,
+    #13CFE0 52%,
+    #1D8DFF
+  );
+
+  color: #031018;
+
+  font-size: 0.82rem;
+  font-weight: 800;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.35),
+    0 0 25px rgba(19,207,224,.16);
+
+  transition: .25s;
+}
+
+
+/* ÍCONES */
+
+.botoes-flutuantes .btn-flutuante i {
+  width: 16px;
+  min-width: 16px;
+
+  text-align: center;
+
+  font-size: 1rem;
+}
+
+
+/* HOVER */
+
+.botoes-flutuantes .btn-flutuante:hover {
+  transform: translateX(-4px);
+
+  box-shadow:
+    0 12px 32px rgba(0,0,0,.40),
+    0 0 30px rgba(19,207,224,.25);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+
+  .botoes-flutuantes {
+    right: 14px;
+    bottom: 14px;
+    gap: 10px;
+  }
+
+  .botoes-flutuantes .btn-flutuante {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    border-radius: 50%;
+  }
+
+  .botoes-flutuantes .btn-flutuante span {
+    display: none;
+  }
+
+}
+
 .botoes-flutuantes .btn-flutuante {
   position: static;
   margin: 0;
