@@ -105,7 +105,7 @@ footer{margin-top:5rem;border-top:1px solid var(--line);background:#03070d;paddi
 
 @media(max-width:950px){nav ul{gap:1rem}.nav-cta{display:none}.tech-stack{grid-template-columns:repeat(2,1fr)}.model{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}}
 @media(max-width:760px){header{padding:.55rem 4%;}.logo-img{width:145px}.menu-toggle{display:block}nav{position:absolute;left:4%;right:4%;top:70px;background:rgba(5,10,18,.98);border:1px solid var(--line);border-radius:12px;padding:.7rem;display:none}nav.open{display:block}nav ul{flex-direction:column;align-items:stretch;gap:.2rem}nav a{display:block;padding:.75rem}.hero{min-height:590px;border-radius:17px}.hero h1{font-size:2.45rem}.grid-3,.grid-2,.model-steps,.timeline,.tech-stack{grid-template-columns:1fr}.section{padding:4rem 0}.btn-flutuante{right:14px;bottom:14px}.btn-flutuante span{display:none}.btn-flutuante{width:48px;height:48px;display:grid;place-items:center;padding:0}.footer-content{flex-direction:column;align-items:flex-start}}
-/* BOTÕES FLUTUANTES - REDES SOCIAIS */
+/* BOTÕES FLUTUANTES - REDES SOCIAIS ok */
 
 .botoes-flutuantes {
   position: fixed;
