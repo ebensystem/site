@@ -1,5 +1,7 @@
 # Ativação Firebase — Site-Ebensystem
 
+> Painel atualizado: consulte [PAINEL.md](PAINEL.md) para cadastro ampliado, edição, cobranças e regras da versão atual.
+
 ## Estado atual
 
 Projeto exclusivo: site-ebensystem. App Web configurado em js/firebase-config.js com os identificadores públicos fornecidos. Authentication Email/Password e Firestore (default), região southamerica-east1, já foram criados pelo proprietário. Nenhuma alteração no EbenFamily e nenhum deploy realizado.
@@ -60,12 +62,12 @@ Teste também as regras via Rules Playground ou Emulator Suite:
 - Autenticado só pode obter seu próprio users/{uid}; não pode listar users ou obter documento alheio.
 - Nem usuário comum nem admin podem criar/alterar/excluir documentos users pelo SDK/REST. Tentativa de promover a si próprio para admin deve falhar.
 - Sem role admin: get/list/create/update/delete em clientes negados.
-- Com users/UID.role=admin: operações válidas permitidas; campos extras, valores negativos e autoria falsa devem ser rejeitados.
+- Com users/UID.role=admin: leitura/criação/edição válidas permitidas; exclusões negadas; campos extras, valores negativos e autoria falsa devem ser rejeitados.
 - Atualização não pode mudar createdAt/createdBy. Na criação use serverTimestamp() para createdAt.
 
 ## GitHub Pages
 
-Somente quando decidir publicar, envie os arquivos do site incluindo js/ e css/auth.css. Não envie .backups/. Não houve deploy automático.
+Somente quando decidir publicar, envie os arquivos do site incluindo js/, css/auth.css e css/admin.css. Não envie .backups/. Não houve deploy automático.
 
 Após publicar, repita os testes em https://ebensystem.com.br/contato/index.html#login e https://ebensystem.com.br/base/index.html, também em aba anônima e celular. Se usar GitHub Pages com subdiretório, teste /<repositorio>/contato/index.html: os links continuam relativos.
 
@@ -78,8 +80,8 @@ O HTML é público; Authentication identifica o usuário e Firestore Rules prote
 - js/admin.js mantém painel oculto até autorizar, observa a role, carrega clientes, cadastra e executa signOut.
 - A sessão é mantida na mesma aba ao navegar/recarregar e termina ao fechar a aba. Não há persistência local de clientes.
 - Coleção clientes conserva empresa, contato, gerente, plano, valorProjeto, valorMensal e pago; ativo e metadados createdAt/createdBy já existiam na integração anterior.
-- Contadores: ativos = ativo; pagos = pago; em andamento = ativo e não pago (convenção inicial).
-- A interface existente oferece cadastro/listagem. Edição/exclusão não foram adicionadas; regras já as restringem a admin.
+- Indicadores atuais: clientes ativos, receita mensal contratada, recebido no mês e cobranças vencidas; consulte PAINEL.md.
+- A interface oferece cadastro, listagem, edição e inativação, além do controle de cobranças. Exclusões são bloqueadas para preservar histórico.
 - Cliente/funcionario são reservados para evolução e não possuem acesso administrativo. Um futuro vínculo ownerUid exigirá alteração controlada do esquema e das regras.
 - Formulário comercial Google Apps Script, app.js, HTML e CSS permaneceram intactos nesta etapa.
 

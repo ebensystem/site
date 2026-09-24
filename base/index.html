@@ -2,93 +2,109 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ebensystem Tecnologia | Base de Clientes</title>
-  <link rel="stylesheet" href="../css/style.css"/><link rel="stylesheet" href="../css/auth.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <title>Ebensystem | Gestão de clientes</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/admin.css"/>
 </head>
-<body>
-  <p id="auth-status" class="auth-status" role="status">Verificando acesso...</p><noscript>Ative o JavaScript para acessar o painel.</noscript>
-  <div id="admin-panel" hidden>
-  <header class="header-bar">
-    <h1>Painel de Clientes Ebensystem</h1>
-    <div class="admin-actions"><button id="logoutBtn" type="button" class="btn-secondary">Sair</button><button id="addClientBtn" class="btn-primary">
-      <i class="fa-solid fa-plus"></i> Adicionar Cliente
-    </button></div>
-  </header>
-
-  <main class="dashboard">
-    <!-- DASHBOARD -->
-    <section class="stats-grid">
-      <div class="stat-card">
-        <i class="fa-solid fa-users"></i>
-        <h2 id="totalClients">0</h2>
-        <p>Total de Clientes</p>
+<body class="admin-body">
+  <div id="auth-status" class="auth-screen" role="status">Verificando seu acesso...</div>
+  <noscript>Ative o JavaScript para acessar o painel.</noscript>
+  <div id="admin-panel" class="admin-shell" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="../"><img src="../img/logo.png" alt="Ebensystem"/><span>GESTÃO DE CLIENTES</span></a>
+      <p class="nav-caption">ESPAÇO DE TRABALHO</p>
+      <div class="side-nav" aria-label="Seções do painel">
+        <button type="button" data-view="overview" class="selected"><span>◈</span> Visão geral</button>
+        <button type="button" data-view="clients"><span>▤</span> Clientes</button>
+        <button type="button" data-view="billing"><span>◷</span> Financeiro</button>
       </div>
-      <div class="stat-card">
-        <i class="fa-solid fa-user-check"></i>
-        <h2 id="activeClients">0</h2>
-        <p>Clientes Ativos</p>
-      </div>
-      <div class="stat-card">
-        <i class="fa-solid fa-money-bill-wave"></i>
-        <h2 id="paidProjects">0</h2>
-        <p>Projetos Pagos</p>
-      </div>
-      <div class="stat-card">
-        <i class="fa-solid fa-spinner"></i>
-        <h2 id="ongoingProjects">0</h2>
-        <p>Projetos em Andamento</p>
-      </div>
-    </section>
-
-    <!-- LISTA DE CLIENTES -->
-    <section class="clients-section">
-      <h2>Clientes</h2>
-      <p id="panel-status" class="auth-status" role="status"></p><div id="clientsList" class="clients-list">
-        <!-- Clientes serão adicionados aqui via JS -->
-      </div>
-    </section>
-  </main>
-
-  <!-- MODAL ADICIONAR CLIENTE -->
-  <div id="clientModal" class="modal">
-    <div class="modal-content">
-      <button type="button" class="close btn-secondary" aria-label="Fechar cadastro">&times;</button>
-      <h2>Adicionar Cliente</h2>
-      <form id="clientForm" onsubmit="return false">
-        <input type="text" maxlength="200" name="empresa" placeholder="Nome da empresa" required/>
-        <input type="text" maxlength="200" name="contato" placeholder="Contato da empresa" required/>
-        <input type="text" maxlength="200" name="gerente" placeholder="Gerente responsável" required/>
-        <select name="plano" required>
-          <option value="">Selecione o plano</option>
-          <optgroup label="Criação de Sites">
-            <option>Essencial</option>
-            <option>Profissional</option>
-            <option>Personalizado</option>
-            <option>Business</option>
-          </optgroup>
-          <optgroup label="Desenvolvimento de Aplicativos">
-            <option>Start</option>
-            <option>Profissional</option>
-            <option>Business</option>
-            <option>Sob Medida</option>
-          </optgroup>
-          <optgroup label="Sistemas Empresariais">
-            <option>Start</option>
-            <option>Profissional</option>
-            <option>Business</option>
-            <option>Sob Medida</option>
-          </optgroup>
-        </select>
-        <input type="number" name="valorProjeto" min="0" max="1000000000" step="0.01" placeholder="Valor do projeto (R$)" required/>
-        <input type="number" name="valorMensal" min="0" max="1000000000" step="0.01" placeholder="Valor mensal (R$)" required/>
-        <label><input type="checkbox" name="pago"/> Já pagou?</label>
-        <button type="submit" class="btn-primary">Salvar Cliente</button>
-      </form>
-    </div>
+      <div class="sidebar-bottom"><span class="secure-dot"></span> Acesso administrativo<p id="admin-email"></p><button id="logoutBtn" class="quiet-button" type="button">Sair da conta ↗</button></div>
+    </aside>
+    <main class="workspace">
+      <div class="topbar"><div><span class="eyebrow">EBENSYSTEM / ADMINISTRAÇÃO</span><h1 id="page-title">Visão geral</h1></div><div class="top-actions"><span id="today-label"></span><button id="addClientBtn" class="primary-button" type="button">+ Novo cliente</button></div></div>
+      <div id="panel-status" class="notice" role="status" aria-live="polite" hidden></div>
+      <section id="view-overview" class="view">
+        <div class="intro"><div><h2>Sua operação, em um só lugar.</h2><p>Acompanhe contratos, recebimentos e o que precisa de atenção.</p></div><span class="live-label" id="sync-label">Conectando...</span></div>
+        <div class="metrics">
+          <article class="metric"><span>Clientes ativos</span><strong id="metric-active">—</strong><small id="metric-total">Carregando carteira</small></article>
+          <article class="metric"><span>Receita mensal contratada</span><strong id="metric-mrr">—</strong><small>Contratos mensais ativos</small></article>
+          <article class="metric"><span>Recebido neste mês</span><strong id="metric-paid">—</strong><small>Pagamentos registrados no mês</small></article>
+          <article class="metric metric-alert"><span>Em atraso</span><strong id="metric-overdue">—</strong><small id="metric-overdue-count">Cobranças abertas vencidas</small></article>
+        </div>
+        <div class="overview-grid">
+          <section class="surface"><div class="section-heading"><div><span class="eyebrow">PRIORIDADES</span><h2>Vencimentos e pendências</h2></div><button class="quiet-button" data-view="billing" type="button">Ver financeiro ↗</button></div><div id="due-list"></div></section>
+          <section class="surface"><div class="section-heading"><div><span class="eyebrow">CARTEIRA</span><h2>Distribuição por serviço</h2></div></div><div id="service-chart"></div><div class="info-note">Receita contratada é uma previsão. Os recebimentos consideram apenas cobranças registradas como pagas.</div></section>
+        </div>
+        <section class="surface recent"><div class="section-heading"><div><span class="eyebrow">RELACIONAMENTO</span><h2>Clientes recentes</h2></div><button class="quiet-button" data-view="clients" type="button">Ver todos ↗</button></div><div id="recent-clients" class="client-grid"></div></section>
+      </section>
+      <section id="view-clients" class="view" hidden>
+        <p class="section-description">Empresas, responsáveis e contratos. Selecione um cliente para consultar ou editar.</p>
+        <div class="toolbar surface">
+          <label class="search-field">Buscar cliente<input id="client-search" type="search" placeholder="Empresa, responsável, e-mail ou documento"/></label>
+          <label>Situação<select id="client-status"><option value="">Todos os clientes</option><option value="active">Ativos</option><option value="inactive">Inativos</option><option value="overdue">Com atraso</option></select></label>
+          <label>Serviço<select id="client-service"><option value="">Todos os serviços</option><option>Site</option><option>Aplicativo</option><option>Sistema</option><option>Infraestrutura</option><option>Outro</option></select></label>
+          <label>Ordenar<select id="client-sort"><option value="name">Nome A–Z</option><option value="recent">Mais recentes</option><option value="value">Maior mensalidade</option></select></label>
+        </div>
+        <div class="list-heading"><p id="client-count"></p><div class="segmented" aria-label="Visualização"><button id="table-view" type="button" aria-pressed="true">Lista</button><button id="cards-view" type="button" aria-pressed="false">Cartões</button></div></div>
+        <div id="clients-list"></div>
+      </section>
+      <section id="view-billing" class="view" hidden>
+        <p class="section-description">Registre cobranças e dê baixa nos pagamentos. O controle é manual; não há emissão de boleto ou débito automático.</p>
+        <div class="billing-actions surface"><div><h2>Mensalidades</h2><p>Gere uma cobrança por contrato mensal ativo na competência escolhida.</p></div><label>Competência<input id="billing-month" type="month" required/></label><button id="generate-bills" class="secondary-button" type="button" disabled>Gerar mensalidades</button><button id="new-bill" class="primary-button" type="button" disabled>+ Cobrança avulsa</button></div>
+        <div class="toolbar surface"><label class="search-field">Buscar cobrança<input id="bill-search" type="search" placeholder="Cliente ou descrição"/></label><label>Situação<select id="bill-status"><option value="">Todas</option><option value="overdue">Vencidas</option><option value="open">Em aberto</option><option value="paid">Pagas</option><option value="cancelled">Canceladas</option></select></label><label>Vencimento<select id="bill-period"><option value="">Todos os meses</option><option value="selected">Competência selecionada</option></select></label></div>
+        <div class="list-heading"><p id="bill-count"></p><span>Valores em reais • vencimentos no horário de Brasília</span></div>
+        <div id="bills-list"></div>
+      </section>
+      <p class="workspace-footer">Ebensystem Tecnologia <span>Gestão de clientes e contratos</span></p>
+    </main>
   </div>
 
-  </div><script src="../app.js"></script><script src="../js/admin.js" defer></script>
+  <dialog id="client-dialog" class="editor-dialog">
+    <form id="clientForm" onsubmit="return false">
+      <div class="dialog-heading"><div><span class="eyebrow">CADASTRO E CONTRATO</span><h2 id="client-dialog-title">Novo cliente</h2></div><button class="icon-button" data-close="client-dialog" type="button" aria-label="Fechar">✕</button></div>
+      <div class="dialog-body">
+        <input name="id" type="hidden"/>
+        <h3>01 / Dados da empresa</h3>
+        <div class="form-grid">
+          <label>Nome da empresa / cliente *<input name="empresa" required maxlength="200" autocomplete="organization"/></label>
+          <label>CPF / CNPJ<input name="documento" maxlength="30" placeholder="Opcional"/></label>
+          <label>Responsável pela empresa *<input name="contato" required maxlength="200" autocomplete="name"/></label>
+          <label>E-mail<input name="email" type="email" maxlength="200" autocomplete="email"/></label>
+          <label>Telefone / WhatsApp<input name="telefone" type="tel" maxlength="40" autocomplete="tel"/></label>
+          <label>Responsável interno *<input name="gerente" required maxlength="200" placeholder="Quem atende este cliente"/></label>
+        </div>
+        <h3>02 / Serviço contratado</h3>
+        <div class="form-grid">
+          <label>Serviço<select name="servico"><option>Site</option><option>Aplicativo</option><option>Sistema</option><option>Infraestrutura</option><option>Outro</option></select></label>
+          <label>Pacote contratado *<input name="plano" required maxlength="120" list="plan-options" placeholder="Ex.: Profissional"/></label>
+          <label>Início do contrato<input name="inicioContrato" type="date" required/></label>
+          <label>Situação<select name="ativo"><option value="true">Ativo</option><option value="false">Inativo</option></select></label>
+          <label>Valor do projeto (R$)<input name="valorProjeto" type="number" min="0" max="1000000000" step="0.01" required value="0"/></label>
+          <label class="check-label"><input name="pago" type="checkbox"/> Projeto inicial já pago <small>Informação do contrato; não gera recebimento no financeiro.</small></label>
+        </div>
+        <h3>03 / Recorrência e observações</h3>
+        <div class="form-grid">
+          <label>Tipo de contrato<select name="ciclo"><option value="mensal">Mensal</option><option value="unico">Pagamento único</option></select></label>
+          <label>Mensalidade (R$)<input name="valorMensal" type="number" min="0" max="1000000000" step="0.01" required value="0"/></label>
+          <label>Dia do vencimento<input name="diaVencimento" type="number" min="1" max="31" step="1" required value="10"/></label>
+          <label>Forma de pagamento<select name="formaPagamento"><option>Pix</option><option>Boleto</option><option>Transferência</option><option>Cartão</option><option>Outro</option></select></label>
+          <label class="span-two">Observações<textarea name="observacoes" rows="3" maxlength="2000" placeholder="Escopo, condições comerciais ou informações de atendimento"></textarea></label>
+        </div>
+        <p class="info-note">Alterações no contrato valem para novas cobranças. Cobranças já geradas conservam seus valores. Inativar um cliente não cancela pendências anteriores.</p>
+        <div id="client-error" class="form-error" role="alert"></div>
+      </div>
+      <div class="dialog-footer"><button class="secondary-button" data-close="client-dialog" type="button">Cancelar</button><button id="save-client" class="primary-button" type="submit">Salvar cliente</button></div>
+    </form>
+  </dialog>
+  <datalist id="plan-options"><option value="Essencial"></option><option value="Profissional"></option><option value="Personalizado"></option><option value="Business"></option><option value="Start"></option><option value="Sob Medida"></option></datalist>
+
+  <dialog id="detail-dialog" class="editor-dialog"><div class="dialog-heading"><div><span class="eyebrow">FICHA DO CLIENTE</span><h2 id="detail-title"></h2></div><button class="icon-button" data-close="detail-dialog" type="button" aria-label="Fechar">✕</button></div><div id="detail-body" class="dialog-body"></div><div class="dialog-footer"><button id="detail-edit" class="primary-button" type="button">Editar cadastro</button></div></dialog>
+
+  <dialog id="bill-dialog" class="editor-dialog compact-dialog"><form id="bill-form" onsubmit="return false"><div class="dialog-heading"><h2>Nova cobrança avulsa</h2><button class="icon-button" data-close="bill-dialog" type="button" aria-label="Fechar">✕</button></div><div class="dialog-body form-grid"><label class="span-two">Cliente<select name="clienteId" required></select></label><label class="span-two">Descrição<input name="descricao" required maxlength="200" placeholder="Ex.: Desenvolvimento do site — parcela 1"/></label><label>Valor (R$)<input name="valor" type="number" required min="0.01" max="1000000000" step="0.01"/></label><label>Vencimento<input name="vencimento" type="date" required/></label><div id="bill-error" class="form-error span-two" role="alert"></div></div><div class="dialog-footer"><button class="secondary-button" data-close="bill-dialog" type="button">Cancelar</button><button class="primary-button" type="submit">Salvar cobrança</button></div></form></dialog>
+
+  <dialog id="payment-dialog" class="editor-dialog compact-dialog"><form id="payment-form" onsubmit="return false"><div class="dialog-heading"><h2>Registrar pagamento</h2><button class="icon-button" data-close="payment-dialog" type="button" aria-label="Fechar">✕</button></div><div class="dialog-body"><p id="payment-summary"></p><label>Data do recebimento<input name="paidDate" type="date" required/></label><p class="info-note">Confirme apenas após verificar o recebimento integral. Este registro não movimenta dinheiro.</p><div id="payment-error" class="form-error" role="alert"></div></div><div class="dialog-footer"><button class="secondary-button" data-close="payment-dialog" type="button">Cancelar</button><button class="primary-button" type="submit">Confirmar recebimento</button></div></form></dialog>
+  <script src="../js/admin.js" defer></script>
 </body>
 </html>
