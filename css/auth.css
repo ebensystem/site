@@ -1,0 +1,9 @@
+[hidden] { display: none !important; }
+.auth-status { margin: 1rem 0; color: var(--muted); overflow-wrap: anywhere; }
+.admin-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.header-bar { flex-wrap: wrap; gap: 1rem; }
+.client-card { flex-wrap: wrap; gap: .75rem; overflow-wrap: anywhere; }
+.modal { z-index: 1001; padding: 1rem; }
+.modal-content { max-height: 90vh; overflow-y: auto; }
+.modal-content input[type="checkbox"] { width: auto; }
+button:disabled { opacity: .6; cursor: wait; }

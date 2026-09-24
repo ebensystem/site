@@ -9,6 +9,7 @@
   </title>
 
   <link href="../css/style.css" rel="stylesheet"/>
+  <link href="../css/auth.css" rel="stylesheet"/>
 
   <link
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -108,121 +109,64 @@
           INFORMAÇÕES DE CONTATO
      ================================ -->
 
-     <div class="card contact-info">
+<div class="card contact-info">
 
-      <span class="section-kicker">
-       Ebensystem Tecnologia
-      </span>
+  <span class="section-kicker">
+    Ebensystem Tecnologia
+  </span>
 
-      <h2>
-       Fale diretamente com nossa equipe.
-      </h2>
+  <h2>
+    Fale diretamente com nossa equipe.
+  </h2>
 
-      <p class="muted">
-       Use o formul&aacute;rio para apresentar sua necessidade
-       ou entre em contato diretamente com nossa equipe.
-      </p>
+  <p class="muted">
+    Use o formulário para apresentar sua necessidade
+    ou entre em contato diretamente com nossa equipe.
+  </p>
 
+  <!-- E-MAIL -->
+  <div class="contact-item">
+    <i class="fa-solid fa-envelope"></i>
+    <span><a href="mailto:contato@ebensystem.com.br">contato@ebensystem.com.br</a></span>
+  </div>
 
-      <!-- E-MAIL -->
+  <!-- TELEFONE -->
+  <div class="contact-item">
+    <i class="fa-solid fa-phone"></i>
+    <span><a href="tel:+5551997706395">(51) 99770-6395</a></span>
+  </div>
 
-      <div class="contact-item">
+  <!-- INSTAGRAM -->
+  <div class="contact-item">
+    <i class="fa-brands fa-instagram"></i>
+    <span><a href="https://www.instagram.com/ebensystem/" target="_blank" rel="noopener noreferrer">@ebensystem</a></span>
+  </div>
 
-       <i class="fa-solid fa-envelope"></i>
+  <!-- LINKEDIN -->
+  <div class="contact-item">
+    <i class="fa-brands fa-linkedin"></i>
+    <span><a href="https://www.linkedin.com/company/ebensystem/" target="_blank" rel="noopener noreferrer" title="LinkedIn da Ebensystem">LinkedIn</a></span>
+  </div>
 
-       <span>
-        <a href="mailto:contato@ebensystem.com.br">
-         contato@ebensystem.com.br
-        </a>
-       </span>
+  <!-- WHATSAPP -->
+  <div class="contact-item">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span><a href="https://wa.me/5551997706395" target="_blank" rel="noopener noreferrer">WhatsApp</a></span>
+  </div>
 
-      </div>
-
-
-      <!-- TELEFONE -->
-
-      <div class="contact-item">
-
-       <i class="fa-solid fa-phone"></i>
-
-       <span>
-        <a href="tel:+5551997706395">
-         (51) 99770-6395
-        </a>
-       </span>
-
-      </div>
-
-
-      <!-- INSTAGRAM -->
-
-      <div class="contact-item">
-
-       <i class="fa-brands fa-instagram"></i>
-
-       <span>
-        <a
-         href="https://www.instagram.com/ebensystem/"
-         target="_blank"
-         rel="noopener noreferrer"
-        >
-         @ebensystem
-        </a>
-       </span>
-
-      </div>
-
-
-      <!-- LINKEDIN -->
-
-      <div class="contact-item">
-
-       <i class="fa-brands fa-linkedin"></i>
-
-       <span>
-        <a
-         href="https://www.linkedin.com/company/ebensystem/"
-         target="_blank"
-         rel="noopener noreferrer"
-         title="LinkedIn da Ebensystem"
-        >
-         LinkedIn
-        </a>
-       </span>
-
-      </div>
-
-
-      <!-- WHATSAPP -->
-
-      <div class="contact-item">
-
-       <i class="fa-brands fa-whatsapp"></i>
-
-       <span>
-        <a
-         href="https://wa.me/5551997706395"
-         target="_blank"
-         rel="noopener noreferrer"
-        >
-         WhatsApp
-        </a>
-       </span>
-
-      </div>
-
-        <!-- LOGIN CLIENTE -->
+  <!-- LOGIN CLIENTE -->
   <div class="cliente-area">
-    <p style="margin-top:1rem">Já é cliente? <a href="#" id="show-login">Clique aqui</a></p>
+    <p style="margin-top:1rem">Já é cliente? <a href="#" id="show-login" aria-controls="login-form" aria-expanded="false">Clique aqui</a></p>
     
-    <form id="login-form" action="../base/index.html" method="get" style="display:none; margin-top:1rem;">
-      <input type="email" name="email" placeholder="Seu e-mail" required class="input-field"/>
-      <input type="password" name="senha" placeholder="Sua senha" required class="input-field"/>
-      <button type="submit" class="btn-secondary">Logar</button>
+    <form id="login-form" onsubmit="return false" style="display:none; margin-top:1rem;">
+      <input type="email" name="email" autocomplete="username" aria-label="Seu e-mail" placeholder="Seu e-mail" required class="input-field"/>
+      <input type="password" name="senha" autocomplete="current-password" aria-label="Sua senha" placeholder="Sua senha" required class="input-field"/>
+      <button type="submit" class="btn-secondary">Logar</button><p id="login-status" class="auth-status" role="status" aria-live="polite"></p><noscript>Ative o JavaScript para entrar.</noscript>
     </form>
   </div>
 
-     </div>
+</div>
+
 
 
      <!-- ===============================
@@ -632,6 +576,9 @@
    );
 
   </script>
+
+  <script src="../js/login.js" defer></script>
+
 
  </body>
 

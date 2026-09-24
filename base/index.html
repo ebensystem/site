@@ -4,15 +4,17 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ebensystem Tecnologia | Base de Clientes</title>
-  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/style.css"/><link rel="stylesheet" href="../css/auth.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
+  <p id="auth-status" class="auth-status" role="status">Verificando acesso...</p><noscript>Ative o JavaScript para acessar o painel.</noscript>
+  <div id="admin-panel" hidden>
   <header class="header-bar">
     <h1>Painel de Clientes Ebensystem</h1>
-    <button id="addClientBtn" class="btn-primary">
+    <div class="admin-actions"><button id="logoutBtn" type="button" class="btn-secondary">Sair</button><button id="addClientBtn" class="btn-primary">
       <i class="fa-solid fa-plus"></i> Adicionar Cliente
-    </button>
+    </button></div>
   </header>
 
   <main class="dashboard">
@@ -43,7 +45,7 @@
     <!-- LISTA DE CLIENTES -->
     <section class="clients-section">
       <h2>Clientes</h2>
-      <div id="clientsList" class="clients-list">
+      <p id="panel-status" class="auth-status" role="status"></p><div id="clientsList" class="clients-list">
         <!-- Clientes serão adicionados aqui via JS -->
       </div>
     </section>
@@ -52,12 +54,12 @@
   <!-- MODAL ADICIONAR CLIENTE -->
   <div id="clientModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <button type="button" class="close btn-secondary" aria-label="Fechar cadastro">&times;</button>
       <h2>Adicionar Cliente</h2>
-      <form id="clientForm">
-        <input type="text" name="empresa" placeholder="Nome da empresa" required/>
-        <input type="text" name="contato" placeholder="Contato da empresa" required/>
-        <input type="text" name="gerente" placeholder="Gerente responsável" required/>
+      <form id="clientForm" onsubmit="return false">
+        <input type="text" maxlength="200" name="empresa" placeholder="Nome da empresa" required/>
+        <input type="text" maxlength="200" name="contato" placeholder="Contato da empresa" required/>
+        <input type="text" maxlength="200" name="gerente" placeholder="Gerente responsável" required/>
         <select name="plano" required>
           <option value="">Selecione o plano</option>
           <optgroup label="Criação de Sites">
@@ -79,14 +81,14 @@
             <option>Sob Medida</option>
           </optgroup>
         </select>
-        <input type="number" name="valorProjeto" placeholder="Valor do projeto (R$)" required/>
-        <input type="number" name="valorMensal" placeholder="Valor mensal (R$)" required/>
+        <input type="number" name="valorProjeto" min="0" max="1000000000" step="0.01" placeholder="Valor do projeto (R$)" required/>
+        <input type="number" name="valorMensal" min="0" max="1000000000" step="0.01" placeholder="Valor mensal (R$)" required/>
         <label><input type="checkbox" name="pago"/> Já pagou?</label>
         <button type="submit" class="btn-primary">Salvar Cliente</button>
       </form>
     </div>
   </div>
 
-  <script src="../app.js"></script>
+  </div><script src="../app.js"></script><script src="../js/admin.js" defer></script>
 </body>
 </html>

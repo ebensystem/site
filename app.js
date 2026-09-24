@@ -16,29 +16,3 @@ if (menuButton && nav) {
     });
   });
 }
-
-// Abrir modal
-const modal = document.getElementById("clientModal");
-const btn = document.getElementById("addClientBtn");
-const span = document.querySelector(".close");
-const form = document.getElementById("clientForm");
-const clientsList = document.getElementById("clientsList");
-
-btn.onclick = () => modal.style.display = "flex";
-span.onclick = () => modal.style.display = "none";
-window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
-
-// Adicionar cliente
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(form).entries());
-  const card = document.createElement("div");
-  card.className = "client-card";
-  card.innerHTML = `
-    <strong>${data.empresa}</strong>
-    <span>${data.plano} • R$${data.valorMensal}/mês • ${data.pago ? "Pago" : "Pendente"}</span>
-  `;
-  clientsList.appendChild(card);
-  modal.style.display = "none";
-  form.reset();
-});
