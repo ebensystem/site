@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ebensystem Tecnologia | Base de Clientes</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+  <header class="header-bar">
+    <h1>Painel de Clientes Ebensystem</h1>
+    <button id="addClientBtn" class="btn-primary">
+      <i class="fa-solid fa-plus"></i> Adicionar Cliente
+    </button>
+  </header>
+
+  <main class="dashboard">
+    <!-- DASHBOARD -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <i class="fa-solid fa-users"></i>
+        <h2 id="totalClients">0</h2>
+        <p>Total de Clientes</p>
+      </div>
+      <div class="stat-card">
+        <i class="fa-solid fa-user-check"></i>
+        <h2 id="activeClients">0</h2>
+        <p>Clientes Ativos</p>
+      </div>
+      <div class="stat-card">
+        <i class="fa-solid fa-money-bill-wave"></i>
+        <h2 id="paidProjects">0</h2>
+        <p>Projetos Pagos</p>
+      </div>
+      <div class="stat-card">
+        <i class="fa-solid fa-spinner"></i>
+        <h2 id="ongoingProjects">0</h2>
+        <p>Projetos em Andamento</p>
+      </div>
+    </section>
+
+    <!-- LISTA DE CLIENTES -->
+    <section class="clients-section">
+      <h2>Clientes</h2>
+      <div id="clientsList" class="clients-list">
+        <!-- Clientes serão adicionados aqui via JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL ADICIONAR CLIENTE -->
+  <div id="clientModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Adicionar Cliente</h2>
+      <form id="clientForm">
+        <input type="text" name="empresa" placeholder="Nome da empresa" required/>
+        <input type="text" name="contato" placeholder="Contato da empresa" required/>
+        <input type="text" name="gerente" placeholder="Gerente responsável" required/>
+        <select name="plano" required>
+          <option value="">Selecione o plano</option>
+          <optgroup label="Criação de Sites">
+            <option>Essencial</option>
+            <option>Profissional</option>
+            <option>Personalizado</option>
+            <option>Business</option>
+          </optgroup>
+          <optgroup label="Desenvolvimento de Aplicativos">
+            <option>Start</option>
+            <option>Profissional</option>
+            <option>Business</option>
+            <option>Sob Medida</option>
+          </optgroup>
+          <optgroup label="Sistemas Empresariais">
+            <option>Start</option>
+            <option>Profissional</option>
+            <option>Business</option>
+            <option>Sob Medida</option>
+          </optgroup>
+        </select>
+        <input type="number" name="valorProjeto" placeholder="Valor do projeto (R$)" required/>
+        <input type="number" name="valorMensal" placeholder="Valor mensal (R$)" required/>
+        <label><input type="checkbox" name="pago"/> Já pagou?</label>
+        <button type="submit" class="btn-primary">Salvar Cliente</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../app.js"></script>
+</body>
+</html>
